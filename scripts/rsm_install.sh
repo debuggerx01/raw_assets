@@ -47,12 +47,12 @@ echo '-----------------------------------------------------'
 mkdir -p $AUTOSTART_DIR
 
 declare -A INSTALL_CMDS;
-INSTALL_CMDS[/etc/redhat-release]="yum install"
-INSTALL_CMDS[/etc/arch-release]="pacman -S"
-INSTALL_CMDS[/etc/gentoo-release]="emerge"
-INSTALL_CMDS[/etc/SuSE-release]="zypp install"
-INSTALL_CMDS[/etc/debian_version]="apt-get install"
-INSTALL_CMDS[/etc/alpine-release]="apk add"
+INSTALL_CMDS[/etc/redhat-release]="yum install avahi"
+INSTALL_CMDS[/etc/arch-release]="pacman -Sy avahi"
+INSTALL_CMDS[/etc/gentoo-release]="emerge --ask net-dns/avahi"
+INSTALL_CMDS[/etc/SuSE-release]="zypp install avahi"
+INSTALL_CMDS[/etc/debian_version]="apt-get install avahi-daemon"
+INSTALL_CMDS[/etc/alpine-release]="apk add avahi"
 
 INSTALL_CMD=""
 
@@ -73,7 +73,8 @@ if [[ $(systemctl is-active avahi-daemon.service) == "active" ]]; then
 else
   echo "尝试安装avahi-daemon"
   # shellcheck disable=SC2086
-  sudo $INSTALL_CMD avahi-daemon
+  sudo $INSTALL_CMD
+  sudo systemctl enable avahi-daemon.service
 fi
 
 if which wget >/dev/null ; then
@@ -87,7 +88,7 @@ fi
 if [[ -e $EXE_DIR ]]; then
   echo "程序目录已存在"
 else
-  mkdir -p "$EXE_DIR"
+  mkdir "$EXE_DIR"
 fi
 
 if [[ -f $EXE_FILE ]]; then
