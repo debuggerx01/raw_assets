@@ -87,7 +87,7 @@ fi
 if [[ -e $EXE_DIR ]]; then
   echo "程序目录已存在"
 else
-  mkdir "$EXE_DIR"
+  mkdir -p "$EXE_DIR"
 fi
 
 if [[ -f $EXE_FILE ]]; then
