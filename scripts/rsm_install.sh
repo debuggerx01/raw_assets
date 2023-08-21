@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# 在线安装命令
+# bash -c "$(curl -fsSL https://debuggerx.com/raw_assets/scripts/rsm_install.sh)"
 
 APP_URL=https://www.debuggerx.com/raw_assets/bin/rsm_server
 
