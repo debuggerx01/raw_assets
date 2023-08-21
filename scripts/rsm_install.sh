@@ -94,7 +94,7 @@ fi
 if [[ -f $EXE_FILE ]]; then
   sudo chmod a+x $EXE_FILE
   VERSION=$($EXE_FILE -v)
-  if [[ $VERSION -gt 0 ]]; then
+  if [[ $VERSION -ge 2 ]]; then
     echo "服务端程序已存在，版本[$VERSION]"
   else
     sudo rm $EXE_FILE
@@ -167,7 +167,7 @@ sudo systemctl enable rsm_server.service
 
   echo "服务端程序已正确配置！今后将在每次开机时自动运行~"
 else
-  echo "模式选在错误，退出安装！！！"
+  echo "模式选择错误，退出安装！！！"
   exit 1
 fi
 
